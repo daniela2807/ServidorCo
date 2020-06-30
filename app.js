@@ -10,6 +10,10 @@ app.post('/formulario', (req, res) => {
     configMensaje(req.body);
     res.status(200).send();
    });
+
+app.get('/home',(req,res) => {
+    res.send({message: "Hola Mundo"});
+})
 app.listen(3000, () => {
 console.log('Servidor corriendo')
 });
