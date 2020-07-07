@@ -15,13 +15,16 @@ module.exports = (formulario) => {
         to: 'bestgymsmartgym@gmail.com', // Cambia esta parte por el destinatario
         subject: `${formulario.Asunto}`,
         html: `
-             <strong>Nombre:</strong> ${formulario.Nombre} <br/>
-             <strong>Apellido:</strong> ${formulario.Apellido} <br/>
-            <strong>E-mail:</strong> ${formulario.Correo} <br/>
-            <strong>Mensaje:</strong> ${formulario.Mensaje}
+        <div style="background-color: #303030;">
+        <div style="color: chartreuse;"> 
+        <h1>Dudas SmartGym</h1>
+             <h3>Nombre de Usuario:</h3> ${formulario.Nombre} 
+             <h3>Apellido:</h3> ${formulario.Apellido} 
+            <h3>E-mail:</h3> ${formulario.Correo} 
+            <h3>Mensaje:</h3> ${formulario.Mensaje} </div></div>
             `
     };
-    transporter.sendMail(mailOptions, function (err, info) {
+    transporter.sendMail(mailOptions, (err, info)  =>{
         if (err)
             console.log(err)
         else
