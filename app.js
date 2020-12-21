@@ -45,28 +45,23 @@ app.get('/getCursos', (req,res) => {
     });
 });
 
+app.delete('/deleteCurso/:nombre',(req,res)=>{
+    conexion.query("delete from cursos where nombre = ? ",[req.params.nombre],(err,rows,field)=>{
+        if(err){
+            res.send(rows)
+        }else
+        {
+            console.log(err);
+        }
+    })
+});
 
 //API para calcular el IMC de la persona
-app.post('/imc', (req, res) => {
+app.post('/insertCurso', (req, res) => {
     //Obtenemos los valores del formulario
     console.log(req.body);
-    const { sexo, estatura, peso } = req.body;  //con esto hacemos desestructuracion
-    //Hacemos el calculo del IMC y si está en sobrepeso o no
-    let imc = peso/(estatura*estatura);
-    let nivel = ""
-    if(imc > 30){
-        nivel = "Obesidad";
-    } else if(imc > 25){
-        nivel = "Sobrepeso";
-    } else if(imc > 18.5){
-        nivel = "Normal";
-    } else {
-        nivel = "Bajo Peso"
-    }
-    res.status(200).send({
-        imc: imc,
-        nivel: nivel
-    });
+    const { Curso, Hora, Imparte, Lugares,Ubicacion} = req.body;  //con esto hacemos desestructuracion
+    conexion.query(`INSERT INTO cursos (nombre,hora,imparte,lugares,ubicacion) values (?,?,?,?,?)`,[Curso,Hora,Imparte,Lugares,Ubicacion]);
 });
 
 
