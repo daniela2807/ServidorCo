@@ -64,7 +64,26 @@ app.post('/insertCurso', (req, res) => {
     conexion.query(`INSERT INTO cursos (nombre,hora,imparte,lugares,ubicacion) values (?,?,?,?,?)`,[Curso,Hora,Imparte,Lugares,Ubicacion]);
 });
 
-
+app.post('/imc', (req, res) => {
+    console.log(req.body);
+    const { sexo, estatura, peso } = req.body;  //con esto hacemos desestructuracion
+    //Hacemos el calculo del IMC y si está en sobrepeso o no
+    let imc = peso/(estatura*estatura);
+    let nivel = ""
+    if(imc > 30){
+        nivel = "Obesidad";
+    } else if(imc > 25){
+        nivel = "Sobrepeso";
+    } else if(imc > 18.5){
+        nivel = "Normal";
+    } else {
+        nivel = "Bajo Peso"
+    }
+    res.status(200).send({
+        imc: imc,
+        nivel: nivel
+    });
+});
 
 app.listen(3000, () => {
 console.log('Servidor corriendo')
